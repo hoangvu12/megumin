@@ -12,7 +12,8 @@ try {
     PRUNING: process.env.PRUNING === "true" ? true : false,
     STAY_TIME: parseInt(process.env.STAY_TIME!) || 30,
     DEFAULT_VOLUME: parseInt(process.env.DEFAULT_VOLUME!) || 100,
-    LOCALE: process.env.LOCALE || "en"
+    LOCALE: process.env.LOCALE || "en",
+    USE_INVIDIOUS_PROXY: process.env.USE_INVIDIOUS_PROXY === "true" ? true : false
   };
 }
 
