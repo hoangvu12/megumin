@@ -131,10 +131,45 @@ const getBasicVideoInfo = async (url: string) => {
     throw new Error("Invalid YouTube URL");
   }
 
-  const response = await fetch(`https://inv.nadeko.net/api/v1/videos/${videoId}`);
+  const response = await fetch(`${INVIDIOUS_BASE_URL}/api/v1/videos/${videoId}`);
   const data = (await response.json()) as InvidiousResponse;
 
   return data;
+};
+
+const searchVideo = async (query: string) => {
+  const response = await fetch(`${INVIDIOUS_BASE_URL}/api/v1/search?q=${encodeURIComponent(query)}`);
+  const data = (await response.json()) as {
+    type: "video" | "playlist";
+    title: string;
+    videoId: string;
+    author: string;
+    authorId: string;
+    authorUrl: string;
+    videoThumbnails: [
+      {
+        quality: string;
+        url: string;
+        width: number;
+        height: number;
+      }
+    ];
+    description: string;
+    descriptionHtml: string;
+    viewCount: number;
+    published: number;
+    publishedText: string;
+    lengthSeconds: number;
+    liveNow: boolean;
+    paid: boolean;
+    premium: boolean;
+  }[];
+
+  if (!data?.length) return null;
+
+  const video = data.find((v) => v.type === "video");
+
+  return video;
 };
 
 export interface SongData {
@@ -172,7 +207,7 @@ export class Song {
         adaptiveFormats: songInfo.adaptiveFormats
       });
     } else {
-      const result = await youtube.searchOne(search);
+      const result = await searchVideo(search);
 
       result ? null : console.log(`No results found for ${search}`);
 
@@ -186,10 +221,10 @@ export class Song {
         throw err;
       }
 
-      songInfo = await getBasicVideoInfo(`https://youtube.com/watch?v=${result.id}`);
+      songInfo = await getBasicVideoInfo(`https://youtube.com/watch?v=${result.videoId}`);
 
       return new this({
-        url: `https://youtube.com/watch?v=${result.id}`,
+        url: `https://youtube.com/watch?v=${result.videoId}`,
         title: songInfo.title,
         duration: songInfo.lengthSeconds,
         adaptiveFormats: songInfo.adaptiveFormats
