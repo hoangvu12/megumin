@@ -5,5 +5,6 @@ export interface Config {
   STAY_TIME: number;
   DEFAULT_VOLUME: number;
   LOCALE: string;
+  INVIDIOUS_BASE_URL: string;
   USE_INVIDIOUS_PROXY: boolean;
 }

@@ -43,7 +43,7 @@ export default {
           })
           .catch(console.error);
 
-    let playlist;
+    let playlist: Playlist;
 
     try {
       playlist = await Playlist.from(argSongName!.split(" ")[0], argSongName!);
@@ -57,6 +57,8 @@ export default {
           .reply({ content: i18n.__("playlist.errorNotFoundPlaylist"), ephemeral: true })
           .catch(console.error);
     }
+
+    console.log("YO");
 
     if (queue) {
       queue.songs.push(...playlist.videos);
@@ -83,7 +85,7 @@ export default {
           .join("\n")
           .slice(0, 4095)
       )
-      .setURL(playlist.data.url!)
+      .setURL(`https://www.youtube.com/playlist?list=${playlist.data.playlistId}`)
       .setColor("#F8AA2A")
       .setTimestamp();
 

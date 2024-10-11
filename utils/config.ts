@@ -13,6 +13,7 @@ try {
     STAY_TIME: parseInt(process.env.STAY_TIME!) || 30,
     DEFAULT_VOLUME: parseInt(process.env.DEFAULT_VOLUME!) || 100,
     LOCALE: process.env.LOCALE || "en",
+    INVIDIOUS_BASE_URL: process.env.INVIDIOUS_BASE_URL || "https://cal1.iv.ggtyler.dev",
     USE_INVIDIOUS_PROXY: process.env.USE_INVIDIOUS_PROXY === "true" ? true : false
   };
 }

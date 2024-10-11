@@ -1,14 +1,13 @@
-import youtube, { Playlist as YoutubePlaylist } from "youtube-sr";
 import { config } from "../utils/config";
+import { getPlaylist, Playlist as InvidiousPlaylist, searchPlaylist } from "../utils/invidious";
+import { playlistPattern } from "../utils/patterns";
 import { Song } from "./Song";
 
-const pattern = /^.*(youtu.be\/|list=)([^#\&\?]*).*/i;
-
 export class Playlist {
-  public data: YoutubePlaylist;
+  public data: InvidiousPlaylist;
   public videos: Song[];
 
-  public constructor(playlist: YoutubePlaylist) {
+  public constructor(playlist: InvidiousPlaylist) {
     this.data = playlist;
 
     this.videos = this.data.videos
@@ -17,23 +16,26 @@ export class Playlist {
       .map((video) => {
         return new Song({
           title: video.title!,
-          url: `https://youtube.com/watch?v=${video.id}`,
-          duration: video.duration / 1000
+          url: `https://youtube.com/watch?v=${video.videoId}`,
+          duration: video.lengthSeconds
         });
       });
   }
 
   public static async from(url: string = "", search: string = "") {
-    const urlValid = pattern.test(url);
-    let playlist;
+    let playlist: InvidiousPlaylist | undefined;
 
-    if (urlValid) {
-      playlist = await youtube.getPlaylist(url);
+    if (playlistPattern.test(url)) {
+      const playlistId = url.match(playlistPattern)?.[2];
+
+      if (!playlistId) throw new Error("Invalid playlist URL");
+
+      playlist = await getPlaylist(playlistId);
     } else {
-      const result = await youtube.searchOne(search, "playlist");
-
-      playlist = await youtube.getPlaylist(result.url!);
+      playlist = await searchPlaylist(search);
     }
+
+    if (!playlist) throw new Error("No playlist results found");
 
     return new this(playlist);
   }

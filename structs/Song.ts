@@ -1,189 +1,23 @@
 import { AudioResource, createAudioResource, StreamType } from "@discordjs/voice";
-import youtube from "youtube-sr";
 import { i18n } from "../utils/i18n";
 import { isURL, videoPattern } from "../utils/patterns";
 
 import { Readable } from "stream";
-import { extractID } from "../utils/extractor";
 import { config } from "../utils/config";
-
-const INVIDIOUS_BASE_URL = "https://inv.nadeko.net";
-
-type InvidiousResponse = {
-  type: string;
-  title: string;
-  videoId: string;
-  videoThumbnails: Array<{
-    quality: string;
-    url: string;
-    width: number;
-    height: number;
-  }>;
-  storyboards: Array<{
-    url: string;
-    templateUrl: string;
-    width: number;
-    height: number;
-    count: number;
-    interval: number;
-    storyboardWidth: number;
-    storyboardHeight: number;
-    storyboardCount: number;
-  }>;
-  description: string;
-  descriptionHtml: string;
-  published: number;
-  publishedText: string;
-  keywords: Array<string>;
-  viewCount: number;
-  likeCount: number;
-  dislikeCount: number;
-  paid: boolean;
-  premium: boolean;
-  isFamilyFriendly: boolean;
-  allowedRegions: Array<string>;
-  genre: string;
-  genreUrl: any;
-  author: string;
-  authorId: string;
-  authorUrl: string;
-  authorVerified: boolean;
-  authorThumbnails: Array<{
-    url: string;
-    width: number;
-    height: number;
-  }>;
-  subCountText: string;
-  lengthSeconds: number;
-  allowRatings: boolean;
-  rating: number;
-  isListed: boolean;
-  liveNow: boolean;
-  isPostLiveDvr: boolean;
-  isUpcoming: boolean;
-  dashUrl: string;
-  adaptiveFormats: Array<{
-    init: string;
-    index: string;
-    bitrate: string;
-    url: string;
-    itag: string;
-    type: string;
-    clen: string;
-    lmt: string;
-    projectionType: string;
-    container: string;
-    encoding: string;
-    audioQuality?: string;
-    audioSampleRate?: number;
-    audioChannels?: number;
-    fps?: number;
-    size?: string;
-    resolution?: string;
-    qualityLabel?: string;
-    colorInfo?: {
-      primaries: string;
-      transferCharacteristics: string;
-      matrixCoefficients: string;
-    };
-  }>;
-  formatStreams: Array<{
-    url: string;
-    itag: string;
-    type: string;
-    quality: string;
-    bitrate: string;
-    fps: number;
-    size: string;
-    resolution: string;
-    qualityLabel: string;
-    container: string;
-    encoding: string;
-  }>;
-  captions: Array<{
-    label: string;
-    language_code: string;
-    url: string;
-  }>;
-  recommendedVideos: Array<{
-    videoId: string;
-    title: string;
-    videoThumbnails: Array<{
-      quality: string;
-      url: string;
-      width: number;
-      height: number;
-    }>;
-    author: string;
-    authorUrl: string;
-    authorId: string;
-    authorVerified: boolean;
-    lengthSeconds: number;
-    viewCountText: string;
-    viewCount: number;
-  }>;
-};
-
-const getBasicVideoInfo = async (url: string) => {
-  const videoId = extractID(url);
-
-  if (!videoId) {
-    throw new Error("Invalid YouTube URL");
-  }
-
-  const response = await fetch(`${INVIDIOUS_BASE_URL}/api/v1/videos/${videoId}`);
-  const data = (await response.json()) as InvidiousResponse;
-
-  return data;
-};
-
-const searchVideo = async (query: string) => {
-  const response = await fetch(`${INVIDIOUS_BASE_URL}/api/v1/search?q=${encodeURIComponent(query)}`);
-  const data = (await response.json()) as {
-    type: "video" | "playlist";
-    title: string;
-    videoId: string;
-    author: string;
-    authorId: string;
-    authorUrl: string;
-    videoThumbnails: [
-      {
-        quality: string;
-        url: string;
-        width: number;
-        height: number;
-      }
-    ];
-    description: string;
-    descriptionHtml: string;
-    viewCount: number;
-    published: number;
-    publishedText: string;
-    lengthSeconds: number;
-    liveNow: boolean;
-    paid: boolean;
-    premium: boolean;
-  }[];
-
-  if (!data?.length) return null;
-
-  const video = data.find((v) => v.type === "video");
-
-  return video;
-};
+import { AdaptiveFormats, getBasicVideoInfo, makeProxy, searchVideo } from "../utils/invidious";
 
 export interface SongData {
   url: string;
   title: string;
   duration: number;
-  adaptiveFormats?: InvidiousResponse["adaptiveFormats"];
+  adaptiveFormats?: AdaptiveFormats;
 }
 
 export class Song {
   public readonly url: string;
   public readonly title: string;
   public readonly duration: number;
-  public readonly adaptiveFormats?: InvidiousResponse["adaptiveFormats"];
+  public readonly adaptiveFormats?: AdaptiveFormats;
 
   public constructor({ url, title, duration, adaptiveFormats = [] }: SongData) {
     this.url = url;
@@ -209,7 +43,7 @@ export class Song {
     } else {
       const result = await searchVideo(search);
 
-      result ? null : console.log(`No results found for ${search}`);
+      if (result?.type !== "video") throw new Error("No video results found");
 
       if (!result) {
         let err = new Error(`No search results found for ${search}`);
@@ -239,17 +73,12 @@ export class Song {
       })
       .find((format) => format.type.startsWith("audio/"));
 
-    if (!format) return;
+    if (!format) throw new Error("No audio formats found");
 
     let formatUrl = format.url;
 
     if (config.USE_INVIDIOUS_PROXY) {
-      const invidiousUrl = new URL(INVIDIOUS_BASE_URL);
-      const formatUrlObject = new URL(format.url);
-
-      formatUrlObject.hostname = invidiousUrl.hostname;
-
-      formatUrl = formatUrlObject.toString();
+      formatUrl = makeProxy(format.url);
     }
 
     const response = await fetch(formatUrl);
