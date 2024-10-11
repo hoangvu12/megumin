@@ -4,26 +4,23 @@ import { isURL, videoPattern } from "../utils/patterns";
 
 import { Readable } from "stream";
 import { config } from "../utils/config";
-import { AdaptiveFormats, getBasicVideoInfo, makeProxy, searchVideo } from "../utils/invidious";
+import { getBasicVideoInfo, makeProxy, searchVideo } from "../utils/invidious";
 
 export interface SongData {
   url: string;
   title: string;
   duration: number;
-  adaptiveFormats?: AdaptiveFormats;
 }
 
 export class Song {
   public readonly url: string;
   public readonly title: string;
   public readonly duration: number;
-  public readonly adaptiveFormats?: AdaptiveFormats;
 
-  public constructor({ url, title, duration, adaptiveFormats = [] }: SongData) {
+  public constructor({ url, title, duration }: SongData) {
     this.url = url;
     this.title = title;
     this.duration = duration;
-    this.adaptiveFormats = adaptiveFormats;
   }
 
   public static async from(url: string = "", search: string = "") {
@@ -37,8 +34,7 @@ export class Song {
       return new this({
         url,
         title: songInfo.title,
-        duration: songInfo.lengthSeconds,
-        adaptiveFormats: songInfo.adaptiveFormats
+        duration: songInfo.lengthSeconds
       });
     } else {
       const result = await searchVideo(search);
@@ -60,14 +56,15 @@ export class Song {
       return new this({
         url: `https://youtube.com/watch?v=${result.videoId}`,
         title: songInfo.title,
-        duration: songInfo.lengthSeconds,
-        adaptiveFormats: songInfo.adaptiveFormats
+        duration: songInfo.lengthSeconds
       });
     }
   }
 
   public async makeResource(): Promise<AudioResource<Song> | void> {
-    const format = this.adaptiveFormats
+    const songInfo = await getBasicVideoInfo(this.url);
+
+    const format = songInfo.adaptiveFormats
       ?.sort((a, b) => {
         return parseInt(b.bitrate!) - parseInt(a.bitrate!);
       })
