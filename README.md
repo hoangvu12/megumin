@@ -37,7 +37,9 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
   "PRUNING": false,
   "LOCALE": "en",
   "DEFAULT_VOLUME": 100,
-  "STAY_TIME": 30
+  "STAY_TIME": 30,
+  "INVIDIOUS_BASE_URL": "",
+  "USE_INVIDIOUS_PROXY": false
 }
 ```
 
