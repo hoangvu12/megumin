@@ -89,6 +89,7 @@ docker run -e "TOKEN=<discord-token>" hoangvudev12/megumin
 
 `/playlist linkin park meteora`
 
+- Clear all the queue (/clear)
 - Now Playing (/nowplaying)
 - Queue system (/queue)
 - Loop / Repeat (/loop)
