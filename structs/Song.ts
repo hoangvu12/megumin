@@ -82,7 +82,18 @@ export class Song {
     const type: StreamType =
       codec === "opus" && format.container === "webm" ? StreamType.WebmOpus : StreamType.Arbitrary;
 
-    return createAudioResource(formatUrl, {
+    const response = await fetch(formatUrl);
+
+    const arrayBuffer = await response.arrayBuffer();
+
+    const stream = new Readable({
+      read() {
+        this.push(Buffer.from(arrayBuffer));
+        this.push(null);
+      }
+    });
+
+    return createAudioResource(stream, {
       metadata: this,
       inputType: type,
       inlineVolume: true
