@@ -163,5 +163,10 @@
     "errorNotChannel": "你必须先加入语音频道!",
     "cooldownMessage": "请等待 {time} 秒后再使用 `{name}` 指令",
     "errorCommand": "执行指令时發生错误"
+  },
+  "clear": {
+    "description": "清除当前队列",
+    "errorNotQueue": "没有队列可以清除。",
+    "result": "队列已清除。"
   }
 }

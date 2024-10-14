@@ -161,5 +161,10 @@
     "usageReply": "Utilizare: {prefix}volume <Volum>",
     "errorNotQueue": "Nu se redă nimic.",
     "result": "Volumul este acum {volume}%"
+  },
+  "clear": {
+    "description": "Șterge coada de redare curentă",
+    "errorNotQueue": "Nu există o coadă.",
+    "result": "Coada a fost ștearsă."
   }
 }

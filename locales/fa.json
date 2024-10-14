@@ -163,5 +163,10 @@
     "errorNotChannel": "ابتدا باید در یک چنل جوین شوید!",
     "cooldownMessage": "لطفا {time} ثانه صبر کنید.",
     "errorCommand": "مشکلی به وجود آمد."
+  },
+  "clear": {
+    "description": "پاک کردن صف آهنگ",
+    "errorNotQueue": "صفی وجود ندارد.",
+    "result": "صف آهنگ پاک شد."
   }
 }

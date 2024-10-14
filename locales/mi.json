@@ -163,5 +163,10 @@
     "errorNotChannel": "To mo da nut a vola fagtit prima!",
     "cooldownMessage": "radbad sky {time} mas emebid bidom reusing ta `{name}` dogpun.",
     "errorCommand": "Bada tos nan via unhod pak dogpun."
+  },
+  "clear": {
+    "description": "Clear ta tic",
+    "errorNotQueue": "Bada tis no tic.",
+    "result": "Tic tis clear."
   }
 }

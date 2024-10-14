@@ -163,5 +163,10 @@
     "errorNotChannel": "Nejprve se musíš připojit do hlasového kanálu!",
     "cooldownMessage": "počkej prosím ještě {time} sekund před opětovným použitím příkazu `{name}`.",
     "errorCommand": "Při vykonávání tohoto příkazu se vyskytla chyba."
+  },
+  "clear": {
+    "description": "Очисти текущата опашка",
+    "errorNotQueue": "Няма опашка за изчистване.",
+    "result": "Опашката е изчистена."
   }
 }

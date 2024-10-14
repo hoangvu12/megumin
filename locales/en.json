@@ -176,5 +176,10 @@
     "errorCommand": "There was an error executing that command."
   },
   "Invite me to your server!": "Invite me to your server!",
-  "Invite": "Invite"
+  "Invite": "Invite",
+  "clear": {
+    "description": "Clears the current music queue.",
+    "errorNotQueue": "There is no queue to clear.",
+    "result": "The queue has been cleared."
+  }
 }

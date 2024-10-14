@@ -163,5 +163,10 @@
     "errorNotChannel": "¡Primero debes unirte a un canal de voz!",
     "cooldownMessage": "Por favor espera {time} segundos antes de volver a usar el comando `{name}`.",
     "errorCommand": "Se produjo un error con ese comando."
+  },
+  "clear": {
+    "description": "Limpia la cola de música actual.",
+    "errorNotQueue": "No hay cola para limpiar.",
+    "result": "La cola ha sido limpiada."
   }
 }

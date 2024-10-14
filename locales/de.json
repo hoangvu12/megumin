@@ -163,5 +163,10 @@
     "errorNotChannel": "Betrete zuerst einen Voice-Channel!",
     "cooldownMessage": "Bitte warte noch {time} Sekunde(n) bevor du wieder den Command `{name}` nuzten kannst.",
     "errorCommand": "Da war ein Fehler beim ausführen des Commands."
+  },
+  "clear": {
+    "description": "Löscht die aktuelle Musik-Warteschlange.",
+    "errorNotQueue": "Es gibt keine Warteschlange zum Löschen.",
+    "result": "Die Warteschlange wurde gelöscht."
   }
 }

@@ -176,5 +176,10 @@
     "errorCommand": "Có lỗi khi thực hiện lệnh đó."
   },
   "Invite me to your server!": "Mời tôi vào máy chủ của bạn!",
-  "Invite": "Mời"
+  "Invite": "Mời",
+  "clear": {
+    "description": "Xóa hàng đợi",
+    "errorNotQueue": "Không có hàng đợi nào.",
+    "result": "Hàng đợi đã được xóa."
+  }
 }

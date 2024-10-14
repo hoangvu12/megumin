@@ -175,5 +175,10 @@
     "errorCommand": "Det oppsto en feil under utførelse av denne kommandoen."
   },
   "Invite me to your server!": "Inviter meg til serveren din!",
-  "Invite": "Inviter"
+  "Invite": "Inviter",
+  "clear": {
+    "description": "Fjern køen",
+    "errorNotQueue": "Det er ingen kø.",
+    "result": "Køen er fjernet."
+  }
 }

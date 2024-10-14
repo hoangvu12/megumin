@@ -163,5 +163,10 @@
     "errorNotChannel": "Kamu harus bergabung dengan saluran suara terlebih dahulu!",
     "cooldownMessage": "Mohon tunggu {time} lagi sebelum menggunakan perintah `{name}` ini kembali.",
     "errorCommand": "Terjadi kesalahan saat menjalankan perintah ini."
+  },
+  "clear": {
+    "description": "Menghapus antrian saat ini",
+    "errorNotQueue": "Tidak ada antrian untuk dihapus.",
+    "result": "Antrian telah dihapus."
   }
 }

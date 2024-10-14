@@ -163,5 +163,10 @@
     "errorNotChannel": "Musisz dołączyć do kanału głosowego!",
     "cooldownMessage": "Proszę zaczekaj {time} przed kolejny użyciem komendy `{name}`.",
     "errorCommand": "Podczas wykonywania tej komendy pojawił się błąd."
+  },
+  "clear": {
+    "description": "Usuwa aktualną kolejkę",
+    "errorNotQueue": "Nie ma kolejki na tym serwerze.",
+    "result": "Kolejka została usunięta."
   }
 }

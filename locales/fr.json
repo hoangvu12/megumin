@@ -176,5 +176,10 @@
     "errorCommand": "Une erreur s'est produite lors de l'exécution de cette commande."
   },
   "Invitez-moi sur votre serveur !": "Invitez-moi sur votre serveur !",
-  "Inviter": "Inviter"
+  "Inviter": "Inviter",
+  "clear": {
+    "description": "Efface la file d'attente musicale actuelle.",
+    "errorNotQueue": "Il n'y a pas de file d'attente à effacer.",
+    "result": "La file d'attente a été effacée."
+  }
 }

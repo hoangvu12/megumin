@@ -163,5 +163,10 @@
     "errorNotChannel": "Devi prima entrare in un canale vocale!",
     "cooldownMessage": "attendi {time} secondo(i) prima di riutilizzare il comando `{name}`.",
     "errorCommand": "Si è verificato un errore durante l'esecuzione del comando."
+  },
+  "clear": {
+    "description": "Cancella la coda musicale attuale.",
+    "errorNotQueue": "Non c'è nessuna coda da cancellare.",
+    "result": "La coda è stata cancellata."
   }
 }

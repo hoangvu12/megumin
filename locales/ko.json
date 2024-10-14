@@ -163,5 +163,10 @@
     "errorNotChannel": "음성 채널에 들어와 있지 않습니다.",
     "cooldownMessage": "`{name}` 명령어를 실행하기 전 {time} 초 만큼 기다려주세요.",
     "errorCommand": "명령어 실행에 실패했습니다."
+  },
+  "clear": {
+    "description": "현재 대기열을 삭제합니다.",
+    "errorNotQueue": "대기열이 존재하지 않습니다.",
+    "result": "대기열이 삭제되었습니다."
   }
 }

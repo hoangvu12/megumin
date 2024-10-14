@@ -163,5 +163,10 @@
     "errorNotChannel": "你必須先加入語音頻道!",
     "cooldownMessage": "請等待 {time} 秒後再使用 `{name}` 指令",
     "errorCommand": "執行指令時發生錯誤"
+  },
+  "clear": {
+    "description": "清除當前隊列",
+    "errorNotQueue": "沒有隊列可以清除。",
+    "result": "隊列已清除。"
   }
 }
