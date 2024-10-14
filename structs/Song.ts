@@ -77,24 +77,12 @@ export class Song {
     if (config.USE_INVIDIOUS_PROXY) {
       formatUrl = makeProxy(format.url);
     }
-
-    const response = await fetch(formatUrl);
-
-    const arrayBuffer = await response.arrayBuffer();
-
-    const stream = new Readable({
-      read() {
-        this.push(Buffer.from(arrayBuffer));
-        this.push(null);
-      }
-    });
-
     const codec = format.encoding;
 
     const type: StreamType =
       codec === "opus" && format.container === "webm" ? StreamType.WebmOpus : StreamType.Arbitrary;
 
-    return createAudioResource(stream, {
+    return createAudioResource(formatUrl, {
       metadata: this,
       inputType: type,
       inlineVolume: true
