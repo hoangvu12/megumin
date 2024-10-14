@@ -14,6 +14,10 @@ I decided to create a separate repository because forks can't open issues. Also,
 
 The main difference is that Megumin uses an [Invidious](https://github.com/iv-org/invidious) instance to make YouTube requests instead of relying on your own network, as the chance of getting blocked by YouTube is quite high
 
+And more features such as:
+
+- Clear command
+
 ## Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**  
