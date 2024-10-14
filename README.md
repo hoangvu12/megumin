@@ -53,6 +53,12 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 }
 ```
 
+## ⚙️ Invidious Configuration
+
+You can change the Invidious instance by updating the `INVIDIOUS_BASE_URL` in your configuration. You can either use [a public Invidious instance](https://docs.invidious.io/instances/) or [host your own](https://docs.invidious.io/installation/).
+
+If you are having trouble streaming (the bot doesn't play audio), try setting `USE_INVIDIOUS_PROXY` to `true`.
+
 ## 🐬 Docker Configuration
 
 For those who would prefer to use our [Docker container](https://hub.docker.com/repository/docker/hoangvudev12/megumin), you may provide values from `config.json` as environment variables.
