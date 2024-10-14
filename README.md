@@ -1,5 +1,5 @@
-![Node build](https://github.com/eritislami/megumin/actions/workflows/node.yml/badge.svg)
-![Docker build](https://github.com/eritislami/megumin/actions/workflows/docker.yml/badge.svg)
+![Node build](https://github.com/hoangvu12/megumin/actions/workflows/node.yml/badge.svg)
+![Docker build](https://github.com/hoangvu12/megumin/actions/workflows/docker.yml/badge.svg)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # 🤖 Megumin (A fork of [EvoBot](https://github.com/eritislami/evobot))
