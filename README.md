@@ -1,12 +1,18 @@
-![Node build](https://github.com/eritislami/evobot/actions/workflows/node.yml/badge.svg)
-![Docker build](https://github.com/eritislami/evobot/actions/workflows/docker.yml/badge.svg)
+![Node build](https://github.com/eritislami/megumin/actions/workflows/node.yml/badge.svg)
+![Docker build](https://github.com/eritislami/megumin/actions/workflows/docker.yml/badge.svg)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-![logo](https://repository-images.githubusercontent.com/186841818/8aa95700-7730-11e9-84be-e80f28520325)
+# 🤖 Megumin (A fork of [EvoBot](https://github.com/eritislami/evobot))
 
-# 🤖 EvoBot (Discord Music Bot)
+> Megumin is a Discord Music Bot built with TypeScript, discord.js & uses Command Handler from [discordjs.guide](https://discordjs.guide)
 
-> EvoBot is a Discord Music Bot built with TypeScript, discord.js & uses Command Handler from [discordjs.guide](https://discordjs.guide)
+## Why a seperate repository but not a fork?
+
+I decided to create a separate repository because forks can't open issues. Also, I have plans to maintain and add more features.
+
+## What's the difference from Megumin with EvoBot?
+
+The main difference is that Megumin uses an [Invidious](https://github.com/iv-org/invidious) instance to make YouTube requests instead of relying on your own network, as the chance of getting blocked by YouTube is quite high
 
 ## Requirements
 
@@ -17,8 +23,8 @@
 ## 🚀 Getting Started
 
 ```sh
-git clone https://github.com/eritislami/evobot.git
-cd evobot
+git clone https://github.com/hoangvu12/megumin.git
+cd megumin
 npm install
 ```
 
@@ -45,10 +51,10 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ## 🐬 Docker Configuration
 
-For those who would prefer to use our [Docker container](https://hub.docker.com/repository/docker/eritislami/evobot), you may provide values from `config.json` as environment variables.
+For those who would prefer to use our [Docker container](https://hub.docker.com/repository/docker/hoangvudev12/megumin), you may provide values from `config.json` as environment variables.
 
 ```shell
-docker run -e "TOKEN=<discord-token>" eritislami/evobot
+docker run -e "TOKEN=<discord-token>" hoangvudev12/megumin
 ```
 
 ## 📝 Features & Commands
@@ -130,8 +136,8 @@ Currently available locales are:
 
 ## 🤝 Contributing
 
-1. [Fork the repository](https://github.com/eritislami/evobot/fork)
-2. Clone your fork: `git clone https://github.com/your-username/evobot.git`
+1. [Fork the repository](https://github.com/hoangvu12/megumin/fork)
+2. Clone your fork: `git clone https://github.com/your-username/megumin.git`
 3. Create your feature branch: `git checkout -b my-new-feature`
 4. Stage changes `git add .`
 5. Commit your changes: `cz` OR `npm run commit` do not use `git commit`
