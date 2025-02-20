@@ -216,6 +216,8 @@ export const makeProxy = (url: string) => {
   const formatUrlObject = new URL(url);
 
   formatUrlObject.hostname = invidiousUrl.hostname;
+  formatUrlObject.protocol = invidiousUrl.protocol;
+  formatUrlObject.port = invidiousUrl.port;
 
   return formatUrlObject.toString();
 };

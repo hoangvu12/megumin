@@ -77,6 +77,7 @@ export class Song {
     if (config.USE_INVIDIOUS_PROXY) {
       formatUrl = makeProxy(format.url);
     }
+
     const codec = format.encoding;
 
     const type: StreamType =
